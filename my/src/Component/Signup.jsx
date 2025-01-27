@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom"; // Link for routing to signup page
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai"; // Icons for visibility toggle
 import { RxAvatar } from "react-icons/rx"; // Add this import for avatar icon
-import { head } from "../../../Backend/src/Controllers/user";
+import { MdPerson } from "react-icons/md";
+import axios from 'axios'; // Import axios for making HTTP requests
 
 export const Signup = () => {
   const [name, setName] = useState(""); // State for name
@@ -13,20 +14,32 @@ export const Signup = () => {
 
   // Handle form submission
   const handleSubmit = (e) => {
-
     e.preventDefault(); // Prevent page reload on form submit
+
+    // Prepare form data to be sent to the server
     const formData = new FormData();
-    formData.append("Name:", name);
-    formData.append("Email:", email);
-    formData.append("Password:", password);
+    formData.append("name", name); // Fixed the incorrect field name
+    formData.append("email", email); // Fixed the incorrect field name
+    formData.append("password", password); // Fixed the incorrect field name
+    if (avatar) {
+      formData.append("avatar", avatar); // Append avatar if present
+    }
+
     const config = {
-        headers: {
-            'Content-Type': 'multipart/form-data'
-    }    // Add further logic for handling signup here (e.g., API call)
+      headers: {
+        'Content-Type': 'multipart/form-data', // Ensure proper headers for multipart data
+      },
+    };
+
+    // Send POST request to create a new user
+    axios.post("http://localhost:5000/create-user", formData, config)
+      .then((res) => {
+        console.log(res.data); // Handle the success response
+      })
+      .catch((error) => {
+        console.error(error); // Handle errors if any
+      });
   };
-  axios.post("http://localhost:5000/create-user", formData, config).then((res) => {
-    
-  })
 
   // Toggle password visibility
   const togglePasswordVisibility = () => {
@@ -37,7 +50,8 @@ export const Signup = () => {
   const handleFileChange = (e) => {
     if (e.target.files[0]) {
       const filepath = URL.createObjectURL(e.target.files[0]);
-      setAvatar(e.target.files[0]);    }
+      setAvatar(e.target.files[0]);
+    }
   };
 
   return (
@@ -124,29 +138,32 @@ export const Signup = () => {
 
           {/* Avatar input field */}
           <div>
-            <label htmlFor="avatar" className="block text-sm font-medium text-gray-700">
-              Avatar
-            </label>
-            <div className="mt-2 flex items-center justify-center">
-              {avatar ? (
-                <img
-                  src={URL.createObjectURL(avatar)}
-                  alt="avatar"
-                  className="w-24 h-24 object-cover rounded-full"
-                />
-              ) : (
-                <RxAvatar className="h-24 w-24 text-gray-300" />
-              )}
-            </div>
-            <input
-              type="file"
-              id="avatar"
-              name="file-input"
-              accept=".jpg, .jpeg, .png"
-              onChange={handleFileChange}
-              className="mt-2 block w-full text-sm text-gray-700 file:py-2 file:px-4 file:mr-4 file:rounded-md file:border file:border-gray-300"
-            />
-          </div>
+  <label htmlFor="avatar" className="block text-sm font-medium text-gray-700">
+    Avatar
+  </label>
+  <div className="mt-2 flex items-center space-x-4">  {/* Added flex and space-x-4 */}
+    {/* Display the avatar preview if there's one */}
+    {avatar ? (
+      <img
+        src={URL.createObjectURL(avatar)}
+        alt="avatar"
+        className="w-16 h-16 object-cover rounded-full"  // Adjust size of the avatar image
+      />
+    ) : (
+      <RxAvatar className="h-16 w-16 text-gray-300" />  // Adjust size of the default icon
+    )}
+    {/* File input */}
+    <input
+      type="file"
+      id="avatar"
+      name="file-input"
+      accept=".jpg, .jpeg, .png"
+      onChange={handleFileChange}
+      className="mt-2 block text-sm text-gray-700 file:py-2 file:px-4 file:rounded-md file:border file:border-gray-300"
+    />
+  </div>
+</div>
+        
 
           <div>
             <button
