@@ -1,5 +1,7 @@
-const {model,schema} = require('mongoose');
-const userSchema = new schema({
+const {model} = require('mongoose');
+const mongoose = require('mongoose');
+
+const userSchema =new mongoose.Schema ({
     name:{
         type: String,
         required: [true, "Please enter your name!"],
@@ -59,4 +61,8 @@ const userSchema = new schema({
      },
      resetPasswordToken: String,
      resetPasswordTime: Date,
-})
+    });
+
+    const userModel=model('User',userSchema);  
+    
+    module.exports=userModel;
