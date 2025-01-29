@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 import { Link } from "react-router-dom"; // Link for routing to signup page
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai"; // Icons for visibility toggle
 import { RxAvatar } from "react-icons/rx"; // Add this import for avatar icon
-import { MdPerson } from "react-icons/md";
+
 import axios from 'axios'; // Import axios for making HTTP requests
 
 export const Signup = () => {

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom"; // Link for routing to signup page
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai"; // Icons for visibility toggle
 
