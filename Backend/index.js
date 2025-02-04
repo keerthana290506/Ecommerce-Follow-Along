@@ -2,8 +2,7 @@ const express=require('express');
 const connectDB = require('./src/Database/db');
 const userModel = require('./src/Model/userModel');
 const userrouter = require('./src/Controllers/user');
-const app=express();
-
+const app=express()
 app.use(express.json());
 
 require('dotenv').config({

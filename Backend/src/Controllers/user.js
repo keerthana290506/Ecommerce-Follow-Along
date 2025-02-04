@@ -50,6 +50,7 @@ userrouter.post("/login",async(req,res)=>{
         if(result){
             
             jwt.sign({email:email},secret,(err,token)=>{
+                
                 if(err){
                     return res.status(400).json({message:"Invalid jwt"});
                 }
