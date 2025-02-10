@@ -1,5 +1,5 @@
-import React from 'react'
-// import { Productcard } from './Productcard'
+import  { useEffect, useState } from 'react'
+import { Productcard } from './Productcard'
 
 // const productdetails=[
 //     {
@@ -22,5 +22,37 @@ import React from 'react'
 //     },
 //   ]
 export const Home = () => {
-  const[productdetails]
+  const[products,setproducts] = useState([]);
+  const[loading, setloading] = useState(true);
+  const[error,setError] = useState(null);
+
+  useEffect(()=>{
+    fetch("http://localhost:3000/product/get-products")
+      .then((res)=>{
+        if(!res.ok){
+          throw new Error(`HTTP error! status:${res.status}`)
+        }
+        return res.json();
+      })
+      .then((data)=>{
+        setproducts(data.products);
+        setloading(false);
+      })
+      .catch((err) =>{
+        console.error(" Error fetching products",err);
+        setError(err.message)
+        setloading(false)
+      })
+  },[])
+
+  return (
+    <div className='w-full min-h-screen bg-neutral-800'>
+    <div className="grid grid-cols-5 gap-4 p-4">{
+        products.map((product,index)=>{
+            return(
+                <>
+                <Productcard key={index} {...product}/></>
+            )
+    })}</div></div>
+  )
 }
