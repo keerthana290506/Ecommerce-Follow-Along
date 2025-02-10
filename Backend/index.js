@@ -1,6 +1,7 @@
 const express=require('express');
 const connectDB = require('./src/Database/db');
 const userModel = require('./src/Model/userModel');
+const Productmodel = require('./src/Model/productmodel')
 const userrouter = require('./src/Controllers/user');
 const app=express()
 app.use(express.json());
@@ -17,6 +18,7 @@ app.get('/',(req,res)=>{
 })
 
 app.use('/auth',userrouter);
+app.use('/product-get',use)
 
 app.listen(PORT,async()=>{
 
