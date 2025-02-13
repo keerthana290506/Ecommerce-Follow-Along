@@ -3,6 +3,7 @@ const connectDB = require('./src/Database/db');
 const userModel = require('./src/Model/userModel');
 const Productmodel = require('./src/Model/productmodel')
 const userrouter = require('./src/Controllers/user');
+const productrouter = require('./src/Controllers/Product')
 const app=express()
 app.use(express.json());
 
@@ -17,8 +18,7 @@ app.get('/',(req,res)=>{
     res.send('Hello World');
 })
 
-app.use('/auth',userrouter);
-app.use('/product-get',use)
+
 
 app.listen(PORT,async()=>{
 
@@ -31,3 +31,5 @@ catch(err){
 }
     
 })
+app.use('/auth',userrouter);
+app.use('/product',productrouter)

@@ -1,6 +1,6 @@
 const {Router}= require("express");
 const userModel = require("../Model/userModel");
-const { upload } = require("../multer");
+const { upload } = require("../../Multer");
 const jwt = require('jsonwebtoken');
 const bcrypt = require("bcrypt");
 const userrouter = Router();
@@ -8,7 +8,7 @@ require('dotenv').config({  path:'./src/config/.env'});
 
 const secret = process.env.private_key;
 
-userrouter.post("/create-user",async(req,res)=>{
+userrouter.post("/create-user",upload.single('file'),async(req,res)=>{
     const {name, email, password} = req.body;
     const userEmail = await userModel.findOne({email});
     if (userEmail) {
