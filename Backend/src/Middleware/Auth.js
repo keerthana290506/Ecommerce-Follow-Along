@@ -1,3 +1,4 @@
-module.exports = (theFunc) => (req, res, next) => {
-    Promise.resolve(theFunc(req, res, next)).catch(next);
-  };
+
+const ErrorHandler = require("../Utils/ErrorHandler");
+const catchAsyncErrors = require("./catchAsyncError");
+const jwt = require("jsonwebtoken");

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom"; // Link for routing to signup page
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai"; // Icons for visibility toggle
 
@@ -84,7 +84,7 @@ export const Login = () => {
           {/* Link to Signup page */}
           <div className="mt-2 text-center">
             <p className="text-sm text-gray-600">
-              Don't have an account yet?{" "}
+              Dont have an account yet?{" "}
               <Link to="/signup" className="font-semibold text-indigo-600 hover:text-indigo-500">
                 Sign up
               </Link>
