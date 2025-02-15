@@ -1,20 +1,24 @@
-import React, { useEffect } from 'react'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 
 
 export const Productcard = ({image,name,price,description}) => {
-  const [currentindex,setcurrentindex] = useState(0);
-  useEffect(()=>{
-    const interval = setInterval(()=>{
-       setcurrentindex((prev)=>(prev+1)%image.length)
-    },2000)
-    return() =>{
-      clearInterval(interval)
-    }
+
+  const {currentindex, setcurrentindex} =useState(0);
+
+  useEffect(() => {
+    const interval= setInterval(()=>{
+        setcurrentindex((prev) => (prev + 1)%image.length);
+
+      },2000)
+    return ()=>{
+      clearInterval(interval);
+    } 
+   
+
   },[image])
-  const currentimage = image[currentindex]
-  
+
+  const currentimage = image[currentindex];
 
   return (
     <div className="bg-neutral-200 p-4 rounded-lg shadow-md flex justify-between flex-col">
