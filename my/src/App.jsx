@@ -1,6 +1,6 @@
 import './App.css';
-import {Navbar} from './Component/Navbar'
-import { Route, Routes ,Router } from 'react-router-dom';
+
+import { Route, Routes , } from 'react-router-dom';
 import { Login } from './Component/Login';
 import { Signup } from './Component/Signup';
 import { Home } from './Component/Home';
@@ -13,8 +13,7 @@ function App() {
   return (
     <>
   
-    <Router>
-      <Navbar/>
+    
     
       <Routes>
         <Route path="/login" element={<Login />} />
@@ -24,7 +23,7 @@ function App() {
         <Route path='/my-product' element={<Productcardseller/>}/>
              </Routes>
        
-        </Router>
+       
      
              
     </>
