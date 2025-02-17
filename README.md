@@ -182,3 +182,7 @@ Milestone 13 and 14
 
 Milestone 15:
 created Navbar in frontend
+
+
+Milestone 16:
+We created a single card page once we click on that it will take to the particular page
