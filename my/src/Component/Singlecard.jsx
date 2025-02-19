@@ -11,6 +11,21 @@ export const Singlecard = () => {
     const {error ,seterror} = useState(false)
     const {id} = useParams()
 
+    const addcart= async(email,productid,productname,quantity)=>{
+        try{
+            await axios.post('http//localhost:3000/cart',{
+
+                email:email,
+                productid:productid,
+                productname:productname,
+                quantity:quantity
+            })
+            console.log(Response.data)
+        }catch(err){
+            console.log(err)
+
+        }
+    }
 const handleDecrement=()=>{
     setquantity(prev=>prev+1)
 }
@@ -35,7 +50,7 @@ const handleIncrement=()=>{
         };
         fetchproduct();
     },[id]);
-    if(loading){
+    if(loading){ 
         return <p>loading</p>
     }
     else if(error){
@@ -145,7 +160,7 @@ const handleIncrement=()=>{
                                     </div>
                                 </div>
                                 <div className="flex flex-wrap gap-x-5 my-3">
-                                    <button className="bg-black text-white px-5 py-2 rounded-full hover:bg-neutral-800 hover:-translate-y-1.5 active:translate-y-0 transition-transform duration-200 ease-in-out active:duration-0 active:ease-linear">
+                                    <button  onClick={addcart} className="bg-black text-white px-5 py-2 rounded-full hover:bg-neutral-800 hover:-translate-y-1.5 active:translate-y-0 transition-transform duration-200 ease-in-out active:duration-0 active:ease-linear">
                                         Add to Cart
                                     </button>
                                 </div>
