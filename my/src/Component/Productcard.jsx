@@ -33,4 +33,4 @@ export const Productcard = ({image,name,price,description}) => {
     </div>
     </div>
   )
-}
+} 
