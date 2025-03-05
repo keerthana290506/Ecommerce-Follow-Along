@@ -66,6 +66,16 @@ userrouter.post("/login",async(req,res)=>{
         }
     });
 
+// userrouter.post('/add-address',async(req,res)=>{
+//     try{
+//         const {
+//             country,
+//             city,
+//             address1,
+//         }
+//     }
+// })
+
 })
 
 module.exports = userrouter;
