@@ -65,6 +65,21 @@ userrouter.post("/login",async(req,res)=>{
             return res.status(400).json({message:"Invalid password"});
         }
     });
+    // userrouter.get("/get-address",auth,async(req,res)=>{
+    //     const {email} = req.user
+    //     try{
+    //         const user = await userModel.findOne({email:email})
+    //     }
+
+    // })
+    userrouter.get("/get-address",auth, async(req,res)=>{
+        const email = req.body.email;
+        const user = await userModel.findOne({email:email});
+        if(!user){
+            return res.status(404).json({message: "User not found"});
+        }
+        return res.status(200).json({addresses:user.addresses});
+    });
 
 // userrouter.post('/add-address',async(req,res)=>{
 //     try{
